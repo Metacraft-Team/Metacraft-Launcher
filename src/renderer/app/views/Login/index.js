@@ -186,7 +186,7 @@ const Login = () => {
                 href='https://docs.metacraft.cc/guides/beginners-guide'
                 style={{ marginLeft: 6 }}
               >
-                How to play?
+                How to play metacraft?
                 <FontAwesomeIcon
                   style={{ marginLeft: 6 }}
                   icon={faQuestionCircle}
