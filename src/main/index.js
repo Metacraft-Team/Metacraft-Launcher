@@ -195,6 +195,16 @@ app.on('ready', () => {
   autoUpdater.on('update-available', e => {
     log.log('===== update-available ======')
     log.log(e)
+    autoUpdater.downloadUpdate()
+  })
+
+  autoUpdater.on('update-downloaded', () => {
+    dialog.showMessageBox({
+      title: 'Install Updates',
+      message: 'Updates downloaded, application will be quit for update...'
+    }).then(() => {
+      setImmediate(() => autoUpdater.quitAndInstall())
+    })
   })
 
   autoUpdater.on('update-not-available', e => {
