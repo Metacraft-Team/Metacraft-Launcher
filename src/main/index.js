@@ -186,13 +186,6 @@ function createWindow () {
 
 app.on('ready', () => {
   createWindow()
-  log.log(`=== github access token: ${process.env.GH_TOKEN} ===`)
-  log.log(process.env.GH_TOKEN)
-  autoUpdater.setFeedURL({
-    provider: 'github',
-    token: process.env.GH_TOKEN,
-    private: true
- })
 
   autoUpdater.on('checking-for-update', e => {
     log.log('===== checking for updates ======')

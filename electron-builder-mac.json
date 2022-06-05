@@ -42,7 +42,6 @@
   },
   "publish": {
     "provider": "github",
-    "private": true,
     "vPrefixedTagName": false,
     "releaseType": "prerelease"
   }
