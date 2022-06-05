@@ -1,0 +1,71 @@
+{
+  "appId": "cc.metacraft.launcher-test",
+  "extends": null,
+  "productName": "Metacraft_Test",
+  "copyright": "Copyright © 2022 Metacraft",
+  "asar": true,
+  "directories": {
+    "output": "release",
+    "buildResources": "resources"
+  },
+  "files": ["dist"],
+  "extraResources": [
+    {
+      "from": "resources/authlib-injector.jar",
+      "to": "./"
+    }
+  ],
+  "extraFiles": [
+    {
+      "from": "node_modules/7zip-bin/mac/x64/7za",
+      "to": "./"
+    },
+    {
+      "from": "node_modules/7zip-bin/win/x64/7za.exe",
+      "to": "./"
+    }
+  ],
+  "dmg": {
+    "sign": false
+  },
+  "mac": {
+    "target": {
+      "target": "dmg",
+      "arch": ["arm64", "x64"]
+    },
+    "hardenedRuntime" : true,
+    "gatekeeperAssess": false,
+    "artifactName": "${productName}_${version}_${arch}.${ext}",
+    "entitlements": "resources/entitlements.mac.plist",
+    "entitlementsInherit": "resources/entitlements.mac.plist",
+    "extendInfo": {
+      "NSMicrophoneUsageDescription": "Enable microphone to active in-game voice communication"
+    },
+    "electronLanguages": ["en"],
+    "icon": "resources/icon-test.png",
+    "identity": null
+  },
+  "win": {
+    "target": [{
+      "target": "nsis",
+      "arch": ["x64"]
+    }],
+    "icon": "resources/icon-test.ico",
+    "artifactName": "${productName}_${version}_${arch}.${ext}"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "deleteAppDataOnUninstall": true,
+    "differentialPackage": false,
+    "installerIcon": "resources/icon-test.ico",
+    "uninstallerIcon": "resources/icon-test.ico"
+  },
+  "publish": {
+    "provider": "github",
+    "private": true,
+    "vPrefixedTagName": false,
+    "releaseType": "prerelease"
+  }
+}

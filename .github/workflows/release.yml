@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    # If the commit is tagged with a version (e.g. "1.0.0") release the app after building
+    tags: ["*"]
+
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Setup Node Environment
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+      - name: Install Dependencies
+        run: yarn
+      - name: Bundle & Release MacOS
+        if: startsWith(matrix.os, 'macos')
+        uses: samuelmeuli/action-electron-builder@v1
+        with:
+          build_script_name: "build"
+          args: "-c electron-builder-mac.json"
+          release: true
+          github_token: ${{ secrets.TOKEN }}
+          mac_certs: ${{ secrets.MAC_CERTS }}
+          mac_certs_password: ${{ secrets.MAC_CERTS_PASSWORD }}
+        env:
+          APPLEID: ${{ secrets.APPLEID }}
+          APPLEIDPASS: ${{ secrets.APPLEIDPASS }}
+      - name: Bundle & Release Windows
+        if: startsWith(matrix.os, 'windows')
+        uses: samuelmeuli/action-electron-builder@v1
+        with:
+          build_script_name: "build"
+          args: "-c electron-builder-win.json"
+          release: true
+          github_token: ${{ secrets.TOKEN }}
+

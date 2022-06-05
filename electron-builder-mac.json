@@ -1,0 +1,49 @@
+{
+  "appId": "cc.metacraft.launcher",
+  "afterSign": "scripts/notarize.js",
+  "extends": null,
+  "productName": "Metacraft",
+  "copyright": "Copyright © 2022 Metacraft",
+  "asar": true,
+  "directories": {
+    "output": "release",
+    "buildResources": "resources"
+  },
+  "files": ["dist"],
+  "extraResources": [
+    {
+      "from": "resources/authlib-injector.jar",
+      "to": "./"
+    }
+  ],
+  "extraFiles": [
+    {
+      "from": "node_modules/7zip-bin/mac/x64/7za",
+      "to": "./"
+    }
+  ],
+  "dmg": {
+    "sign": false
+  },
+  "mac": {
+    "target": {
+      "target": "dmg",
+      "arch": ["arm64", "x64"]
+    },
+    "hardenedRuntime" : true,
+    "gatekeeperAssess": false,
+    "artifactName": "${productName}_${version}_${arch}.${ext}",
+    "entitlements": "resources/entitlements.mac.plist",
+    "entitlementsInherit": "resources/entitlements.mac.plist",
+    "extendInfo": {
+      "NSMicrophoneUsageDescription": "Enable microphone to active in-game voice communication"
+    },
+    "electronLanguages": ["en"]
+  },
+  "publish": {
+    "provider": "github",
+    "private": true,
+    "vPrefixedTagName": false,
+    "releaseType": "prerelease"
+  }
+}

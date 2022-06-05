@@ -1,0 +1,44 @@
+{
+  "appId": "cc.metacraft.launcher",
+  "extends": null,
+  "productName": "Metacraft",
+  "copyright": "Copyright © 2022 Metacraft",
+  "asar": true,
+  "directories": {
+    "output": "release",
+    "buildResources": "resources"
+  },
+  "files": ["dist"],
+  "extraResources": [
+    {
+      "from": "resources/authlib-injector.jar",
+      "to": "./"
+    }
+  ],
+  "extraFiles": [
+    {
+      "from": "node_modules/7zip-bin/win/x64/7za.exe",
+      "to": "./"
+    }
+  ],
+  "win": {
+    "target": [{
+      "target": "nsis",
+      "arch": ["x64"]
+    }],
+    "artifactName": "${productName}_${version}_${arch}.${ext}"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "deleteAppDataOnUninstall": true,
+    "differentialPackage": false
+  },
+  "publish": {
+    "provider": "github",
+    "private": true,
+    "vPrefixedTagName": false,
+    "releaseType": "prerelease"
+  }
+}
