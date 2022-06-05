@@ -38,7 +38,7 @@
     ],
     "hardenedRuntime" : true,
     "gatekeeperAssess": false,
-    "artifactName": "${productName}_${version}_${arch}.${ext}",
+    "artifactName": "${productName}_${version}_${os}_${arch}.${ext}",
     "entitlements": "resources/entitlements.mac.plist",
     "entitlementsInherit": "resources/entitlements.mac.plist",
     "extendInfo": {
