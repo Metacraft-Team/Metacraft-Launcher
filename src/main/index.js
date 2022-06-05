@@ -15,6 +15,8 @@ const {
 } = require('electron')
 const log = require("electron-log")
 const { autoUpdater } = require('electron-updater')
+autoUpdater.autoDownload = true
+autoUpdater.logger = log
 
 let mainWindow
 const gotTheLock = app.requestSingleInstanceLock()
@@ -186,32 +188,6 @@ function createWindow () {
 
 app.on('ready', () => {
   createWindow()
-
-  autoUpdater.on('checking-for-update', e => {
-    log.log('===== checking for updates ======')
-    log.log(e)
-  })
-
-  autoUpdater.on('update-available', e => {
-    log.log('===== update-available ======')
-    log.log(e)
-    autoUpdater.downloadUpdate()
-  })
-
-  autoUpdater.on('update-downloaded', () => {
-    dialog.showMessageBox({
-      title: 'Install Updates',
-      message: 'Updates downloaded, application will be quit for update...'
-    }).then(() => {
-      setImmediate(() => autoUpdater.quitAndInstall())
-    })
-  })
-
-  autoUpdater.on('update-not-available', e => {
-    log.log('===== update-not-available ======')
-    log.log(e)
-  })
-
   autoUpdater.checkForUpdatesAndNotify()
 })
 
