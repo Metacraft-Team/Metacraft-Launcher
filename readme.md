@@ -9,6 +9,8 @@
 
 Electron launcher to start metacraft game, forked from GDLauncher and based on Electron.
 
+It implements connecting your web3 wallet to log in
+
 ![image](https://user-images.githubusercontent.com/5381613/186475638-1b9770d8-d6e8-42f7-b52b-ea6104413a6d.png)
 
 ![image](https://user-images.githubusercontent.com/5381613/186475797-36ca7234-0521-4823-94cf-c525fdd36793.png)
